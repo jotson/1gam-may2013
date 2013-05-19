@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <!-- Change PACKAGE to something meaningful -->
+    <meta title="Shoot" package="com.happyshiny.shoot" version="1.0.0" company="Happy Shiny" />
+    <app main="com.happyshiny.shoot.Main" file="Main" path="bin" swf-version="11" />
+    
+    <window width="460" height="800" orientation="portrait" resizable="true" background="0x000000" />
+
+    <source path="source" />
+
+    <haxelib name="nme" />
+    <haxelib name="flixel" />
+    
+    <icon path="assets/images/icon.svg" />
+
+    <assets path="assets/data" />
+    <assets path="assets/images" />
+    <assets path="assets/fonts" />
+
+    <!-- See http://www.nme.io/developer/tutorials/playing-sound/ -->
+    <assets path="assets/sounds" if="flash">
+        <!-- mp3s -->
+        <!-- <sound path="explosion.mp3" id="explosion" /> -->
+    </assets>
+
+    <assets path="assets/sounds" if="android">
+        <!-- oggs -->
+        <!-- <sound path="explosion.ogg" id="explosion" /> -->
+    </assets>
+
+    <assets path="assets/music">
+        <!-- mp3s -->
+        <!-- <music path="intro.mp3" id="intro" /> -->
+    </assets>
+
+    <!-- <certificate />
+        Use the certificate node to release-sign Android or BlackBerry applications.
+        
+        If you do not include the password attribute, you will be prompted for your certificate password
+        at the command-line.
+        
+        For Android, the alias will be set to the file name of your certificate by default,
+        without the extension. If the alias name is different, you can use the alias attribute.
+        
+        If you have set the password attribute, the alias_password attribute will default to the same 
+        value. Otherwise you can add an alias-password attribute to specify a different value.
+        
+        BlackBerry does not use the "alias" or "alias-password" attributes.
+        
+    <section if="release-sign">
+        <certificate path="path/to/android.keystore" if="android" />
+    </section>
+    -->
+</project>
