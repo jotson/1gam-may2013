@@ -1,31 +1,37 @@
 package com.happyshiny.shoot.entities;
 
+import org.flixel.FlxG;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 
 class Missile extends FlxSprite
 {
-    public static var ACCELERATION = 100;
+    public static var ACCELERATION = 300;
+    public var player : Player;
     private var launchTimer : Float;
-    private var player : Player;
 
     public function new()
     {
-        super.new(-500, -500);
+        super(-500, -500);
+        this.width = 10;
+        this.height = 25;
     }
 
     public override function revive()
     {
         super.revive();
 
-        this.energy = MAX_ENERGY;
-        this.angle = 0;
-        this.makeGraphic(5, 5, color);
+        var c : Int = Player.COLOR_BOTTOM;
+        if (player.side == Player.SIDE_TOP)
+        {
+            c = Player.COLOR_TOP;
+        }
+
+        this.makeGraphic(Std.int(width), Std.int(height), c);
         this.velocity.y = 0;
         this.acceleration.y = 0;
-        this.player = null;
 
-        launchTimer = 3;
+        launchTimer = 2;
     }
 
     public override function update()
@@ -35,7 +41,7 @@ class Missile extends FlxSprite
         if (player == null) return;
 
         launchTimer -= FlxG.elapsed;
-        if (launchTimer <= 0 && velocity.y = 0 && acceleration.y = 0)
+        if (launchTimer <= 0 && velocity.y == 0 && acceleration.y == 0)
         {
             if (player.side == Player.SIDE_TOP)
             {

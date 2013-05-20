@@ -39,7 +39,7 @@ class Main extends Sprite
         addChild(new Game());
 
         // Frame rate display
-        var fps = new FPS(0, 0, 0xff0000);
+        var fps = new FPS(FlxG.camera.width-50, 0, 0xff0000);
         Lib.current.stage.addChild(fps);
 
         // FlxG.debug = true;
@@ -51,7 +51,7 @@ class Main extends Sprite
     private function initialize():Void 
     {
         Lib.current.stage.align = StageAlign.TOP_LEFT;
-        Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
+        Lib.current.stage.scaleMode = StageScaleMode.SHOW_ALL;
 
         // Load sounds
         // SoundManager.add("explosion", "explosion");
@@ -69,8 +69,8 @@ class Game extends FlxGame
     {
         var stageWidth:Int = Lib.current.stage.stageWidth;
         var stageHeight:Int = Lib.current.stage.stageHeight;
-        var ratioX:Float = stageWidth / 460;
-        var ratioY:Float = stageHeight / 800;
+        var ratioX:Float = stageWidth / 400;
+        var ratioY:Float = stageHeight / 640;
         var ratio:Float = Math.min(ratioX, ratioY);
         var cameraWidth = Math.ceil(stageWidth / ratio);
         var cameraHeight = Math.ceil(stageHeight / ratio);

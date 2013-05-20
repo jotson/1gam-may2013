@@ -20,11 +20,38 @@ import org.flixel.FlxU;
 
 import com.happyshiny.util.SoundManager;
 
-class MenuState extends FlxState
+class GameoverState extends FlxState
 {
     public override function create():Void
     {
         super.create();
+
+        var winnerTextTop : FlxText = new FlxText(0, FlxG.height/8, FlxG.width, "", 56, true);
+        winnerTextTop.alignment = "center";
+        if (G.topWins)
+        {
+            winnerTextTop.text = "RED WINS!";
+            this.bgColor = 0xffff0000;
+        }
+        else
+        {
+            winnerTextTop.text = "BLUE WINS!";
+            this.bgColor = 0xff0000ff;
+        }
+        add(winnerTextTop);
+
+        var winnerTextBottom : FlxText = new FlxText(0, FlxG.height - FlxG.height/8 - 56, FlxG.width, "", 56, true);
+        winnerTextBottom.angle = 180;
+        winnerTextBottom.alignment = "center";
+        if (G.topWins)
+        {
+            winnerTextBottom.text = "RED WINS!";
+        }
+        else
+        {
+            winnerTextBottom.text = "BLUE WINS!";
+        }
+        add(winnerTextBottom);
 
         // Start button
         add(new Button(FlxG.width/2, FlxG.height/2, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));

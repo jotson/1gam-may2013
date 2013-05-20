@@ -1,6 +1,6 @@
 package com.happyshiny.shoot.states;
 
-import com.happyshiny.shoot.Button;
+import com.happyshiny.shoot.G;
 import com.happyshiny.shoot.entities.Player;
 import nme.Assets;
 import nme.geom.Rectangle;
@@ -20,14 +20,13 @@ import org.flixel.FlxU;
 
 import com.happyshiny.util.SoundManager;
 
-class MenuState extends FlxState
+class GameState extends FlxState
 {
     public override function create():Void
     {
         super.create();
 
-        // Start button
-        add(new Button(FlxG.width/2, FlxG.height/2, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
+        G.resetState();
 
         // Keyboard events
         Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
@@ -39,26 +38,25 @@ class MenuState extends FlxState
         // SoundManager.playMusic("music");
     }
     
-    public function startGame()
-    {
-        FlxG.switchState(new GameState());
-        destroy();
-    }
-
     public function onKeyUp(e : KeyboardEvent):Void
     {
         // Space bar
         if (e.keyCode == 32)
         {
-            e.stopImmediatePropagation();
-            startGame();
         }
 
         // Escape key (also Android back button)
         if (e.keyCode == 27)
         {
-            Lib.exit();
+            e.stopImmediatePropagation();
+            gotoMenu();
         }
+    }
+
+    public function gotoMenu()
+    {
+        FlxG.switchState(new MenuState());
+        destroy();
     }
 
     public override function destroy():Void
@@ -71,5 +69,7 @@ class MenuState extends FlxState
     public override function update():Void
     {
         super.update();
+
+        G.update();
     }   
 }

@@ -4,7 +4,7 @@
     <meta title="Shoot" package="com.happyshiny.shoot" version="1.0.0" company="Happy Shiny" />
     <app main="com.happyshiny.shoot.Main" file="Main" path="bin" swf-version="11" />
     
-    <window width="460" height="800" orientation="portrait" resizable="true" background="0x000000" />
+    <window width="400" height="640" orientation="portrait" resizable="true" background="0x000000" />
 
     <source path="source" />
 
