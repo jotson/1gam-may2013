@@ -80,7 +80,7 @@ class Player extends FlxSprite
     {
         if (!this.alive) return;
 
-        if (points.length > MAX_FINGERS) points = points.splice(0, MAX_FINGERS);
+        if (points.length > MAX_FINGERS) points = points.splice(points.length-MAX_FINGERS, MAX_FINGERS);
 
         for(m in slots)
         {
