@@ -29,8 +29,6 @@ class Player extends FlxSprite
         this.energy = 0;
         this.side = side;
 
-        this.alpha = 0.75;
-
         x = 0;
         if (side == Player.SIDE_TOP)
         {

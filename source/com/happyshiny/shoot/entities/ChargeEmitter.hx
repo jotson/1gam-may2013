@@ -1,6 +1,8 @@
 package com.happyshiny.shoot.entities;
 
 import com.happyshiny.util.SoundManager;
+import flash.display.Graphics;
+import nme.display.BlendMode;
 import org.flixel.addons.FlxEmitterExt;
 import org.flixel.FlxSprite;
 import org.flixel.FlxEmitter;
@@ -98,8 +100,7 @@ class ChargeParticle extends FlxParticle
         makeGraphic(5, 5, 0xffffffff);
         centerOffsets();
 
-        x = -500;
-        y = -500;
+        visible = false;
     }
 
     public override function onEmit()
@@ -114,6 +115,7 @@ class ChargeParticle extends FlxParticle
         super.revive();
 
         alpha = 1;
+        visible = true;
         
         var radius = 50;
         var angle = Math.random() * Math.PI * 2;

@@ -26,8 +26,32 @@ class MenuState extends FlxState
     {
         super.create();
 
+        var top = new FlxSprite(0, 0);
+        top.makeGraphic(FlxG.width, Std.int(FlxG.height/2), Player.COLOR_TOP);
+        add(top);
+
+        var bottom = new FlxSprite(0, FlxG.height/2);
+        bottom.makeGraphic(FlxG.width, Std.int(FlxG.height/2), Player.COLOR_BOTTOM);
+        add(bottom);
+
+        var titleText : FlxText = new FlxText(0, FlxG.height/16 * 2, FlxG.width, "DUEL!", 56, true);
+        titleText.alignment = "center";
+        add(titleText);
+
+        var bylineText : FlxText = new FlxText(0, FlxG.height/16 * 4, FlxG.width, "By John Watson", 28, true);
+        bylineText.alignment = "center";
+        add(bylineText);
+
+        var urlText : FlxText = new FlxText(0, FlxG.height/16 * 12, FlxG.width, "flagrantdisregard.com", 20, true);
+        urlText.alignment = "center";
+        add(urlText);
+
+        var ogamText : FlxText = new FlxText(0, FlxG.height/16 * 13, FlxG.width, "#1GAM", 20, true);
+        ogamText.alignment = "center";
+        add(ogamText);
+
         // Start button
-        add(new Button(FlxG.width/2, FlxG.height/2 - 32, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
+        add(new Button(FlxG.width/2, FlxG.height/2 - 20, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
 
         // Keyboard events
         Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);

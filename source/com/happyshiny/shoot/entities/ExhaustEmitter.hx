@@ -20,7 +20,7 @@ class ExhaustEmitter extends FlxEmitter
 
     public function new()
     {
-        super(-500, -500, PARTICLE_COUNT);
+        super(0, 0, PARTICLE_COUNT);
 
         minParticleSpeed = new FlxPoint(0, 0);
         maxParticleSpeed = new FlxPoint(0, 0);
@@ -53,6 +53,8 @@ class ExhaustParticle extends FlxParticle
 
         makeGraphic(Missile.WIDTH, 5, 0xffffffff);
         centerOffsets();
+
+        visible = false;
     }
 
     public override function onEmit()
