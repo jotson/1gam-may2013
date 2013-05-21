@@ -97,7 +97,7 @@ class ChargeParticle extends FlxParticle
     {
         super();
 
-        makeGraphic(5, 5, 0xffffffff);
+        this.loadGraphic("assets/images/charge-particle.png");
         centerOffsets();
 
         visible = false;

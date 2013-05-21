@@ -45,7 +45,7 @@ class ExplosionParticle extends FlxParticle
     {
         super();
 
-        makeGraphic(5, 5, 0xffffffff);
+        loadGraphic("assets/images/explosion-particle.png");
         centerOffsets();
     }
 

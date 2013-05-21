@@ -51,7 +51,7 @@ class ExhaustParticle extends FlxParticle
     {
         super();
 
-        makeGraphic(Missile.WIDTH, 5, 0xffffffff);
+        loadGraphic("assets/images/exhaust-particle.png");
         centerOffsets();
 
         visible = false;
