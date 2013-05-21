@@ -27,7 +27,7 @@ class MenuState extends FlxState
         super.create();
 
         // Start button
-        add(new Button(FlxG.width/2, FlxG.height/2, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
+        add(new Button(FlxG.width/2, FlxG.height/2 - 32, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
 
         // Keyboard events
         Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);

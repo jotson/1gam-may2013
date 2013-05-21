@@ -1,20 +1,61 @@
 package com.happyshiny.shoot.entities;
 
+import com.happyshiny.shoot.entities.ExhaustEmitter;
+import com.happyshiny.shoot.entities.ExplosionEmitter;
+import com.happyshiny.util.SoundManager;
 import org.flixel.FlxG;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 
 class Missile extends FlxSprite
 {
-    public static var SPEED = 1600;
+    public static var WIDTH = 25;
+
+    public static var SPEED = 60;
     public var player : Player;
     private var launchTimer : Float;
+
+    private var exhaustEmitter : ExhaustEmitter;
+    private var explosionEmitter : ExplosionEmitter;
 
     public function new()
     {
         super(-500, -500);
-        this.width = 50;
-        this.height = 2000;
+        this.width = WIDTH;
+        this.height = 25;
+
+        exhaustEmitter = new ExhaustEmitter();
+        exhaustEmitter.go();
+
+        FlxG.state.add(exhaustEmitter);
+
+        explosionEmitter = new ExplosionEmitter();
+        FlxG.state.add(explosionEmitter);
+    }
+
+    public override function kill()
+    {
+        super.kill();
+
+        exhaustEmitter.x = -500;
+        exhaustEmitter.y = -500;
+
+        explosionEmitter.x = this.x;
+        explosionEmitter.y = this.y;
+        for(m in explosionEmitter.members)
+        {
+            if (player.side == Player.SIDE_TOP)
+            {
+                m.color = Player.COLOR_TOP;
+            }
+            else
+            {
+                m.color = Player.COLOR_BOTTOM;
+            }
+        }
+        explosionEmitter.go();
+        
+        SoundManager.play("missile-hit");
     }
 
     public override function revive()
@@ -24,12 +65,12 @@ class Missile extends FlxSprite
         var c : Int;
         if (player.side == Player.SIDE_TOP)
         {
-            y = 0 - this.height;
+            y = player.y + player.height + 1;
             c = Player.COLOR_TOP;
         }
         else
         {
-            y = FlxG.height;
+            y = player.y - this.height - 1;
             c = Player.COLOR_BOTTOM;
         }
 
@@ -38,7 +79,7 @@ class Missile extends FlxSprite
         this.acceleration.y = 0;
         this.visible = false;
 
-        launchTimer = 0.25;
+        launchTimer = 0;
     }
 
     public override function update()
@@ -47,9 +88,22 @@ class Missile extends FlxSprite
 
         if (player == null) return;
 
-        launchTimer -= FlxG.elapsed;
-        if (launchTimer <= 0 && velocity.y == 0 && acceleration.y == 0)
+        exhaustEmitter.x = this.x + this.width/2;
+
+        if (player.side == Player.SIDE_TOP)
         {
+            exhaustEmitter.y = this.y;
+        }
+        else
+        {
+            exhaustEmitter.y = this.y + this.height;
+        }
+
+        launchTimer -= FlxG.elapsed;
+        if (launchTimer <= 0 && velocity.y == 0)
+        {
+            SoundManager.play("launch");
+
             if (player.side == Player.SIDE_TOP)
             {
                 velocity.y = SPEED;

@@ -15,9 +15,10 @@ class Button extends FlxButton
         label = null;
 
         loadGraphic(Graphic, true, true, width, height);
+        
         x = x - width/2;
         y = y - height/2;
 
-        // FlxG.tween(this, { y: y + 10 }, Math.random() * 0.3 + 0.4, { type: FlxTween.PINGPONG, ease: Ease.quadInOut });
+        FlxG.tween(this, { y: y + 10 }, Math.random() * 0.3 + 0.4, { type: FlxTween.PINGPONG, ease: Ease.quadInOut });
     }
 }

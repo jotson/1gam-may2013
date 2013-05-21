@@ -4,7 +4,7 @@
     <meta title="Shoot" package="com.happyshiny.shoot" version="1.0.0" company="Happy Shiny" />
     <app main="com.happyshiny.shoot.Main" file="Main" path="bin" swf-version="11" />
     
-    <window width="400" height="640" orientation="portrait" resizable="true" background="0x000000" />
+    <window width="400" height="608" orientation="portrait" resizable="true" background="0x000000" />
 
     <source path="source" />
 
@@ -20,12 +20,16 @@
     <!-- See http://www.nme.io/developer/tutorials/playing-sound/ -->
     <assets path="assets/sounds" if="flash">
         <!-- mp3s -->
-        <!-- <sound path="explosion.mp3" id="explosion" /> -->
+        <sound path="hit.mp3" id="hit" />
+        <sound path="missile-hit.mp3" id="missile-hit" />
+        <sound path="launch.mp3" id="launch" />
     </assets>
 
     <assets path="assets/sounds" if="android">
         <!-- oggs -->
-        <!-- <sound path="explosion.ogg" id="explosion" /> -->
+        <sound path="hit.ogg" id="hit" />
+        <sound path="missile-hit.ogg" id="missile-hit" />
+        <sound path="launch.ogg" id="launch" />
     </assets>
 
     <assets path="assets/music">

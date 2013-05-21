@@ -83,7 +83,7 @@ class G
 
     public static function collisions()
     {
-        FlxG.overlap(topGroup, bottomGroup, function(top, bottom) { objectHit(top, bottom); } );
+        FlxG.overlap(topGroup, bottomGroup, function(o1, o2) { objectHit(o1, o2); });
     }
 
     public static function gameOver()
@@ -92,35 +92,44 @@ class G
         FlxG.switchState(new GameoverState());
     }
 
-    public static function objectHit(top : FlxObject, bottom : FlxObject) : Bool
+    public static function objectHit(o1 : FlxObject, o2 : FlxObject) : Bool
     {
-        if (FlxU.getClassName(top) == "com.happyshiny.shoot.entities.Missile")
+        // Top player missile hits something
+        if (FlxU.getClassName(o1) == "com.happyshiny.shoot.entities.Missile")
         {
-            if (top.velocity.y == 0)
+            if (o1.velocity.y == 0)
             {
                 topPlayer.hurt(0);
             }
-            top.kill();
+            o1.kill();
         }
 
-        if (FlxU.getClassName(top) == "com.happyshiny.shoot.entities.Player")
+        // Missile hits top player
+        if (FlxU.getClassName(o1) == "com.happyshiny.shoot.entities.Player")
         {
-            top.hurt(0);
+            o1.hurt(0);
         }
 
-        if (FlxU.getClassName(bottom) == "com.happyshiny.shoot.entities.Missile")
+        // Bottom player missile hits something
+        if (FlxU.getClassName(o2) == "com.happyshiny.shoot.entities.Missile")
         {
-            if (bottom.velocity.y == 0)
+            if (o2.velocity.y == 0)
             {
                 bottomPlayer.hurt(0);
             }
-            bottom.kill();
+            o2.kill();
         }
 
-        if (FlxU.getClassName(bottom) == "com.happyshiny.shoot.entities.Player")
+        // Missile hits bottom player
+        if (FlxU.getClassName(o2) == "com.happyshiny.shoot.entities.Player")
         {
-            bottom.hurt(0);
+            o2.hurt(0);
         }
+
+        // if (FlxU.getClassName(o2) == "com.happyshiny.shoot.entities.Particles.ChargeEmitter")
+        // {
+
+        // }
 
         FlxG.flash(0xffffffff, 0.1, null, true);
 
@@ -146,6 +155,22 @@ class G
             }
         }
 
+        // This is only here for debugging
+        #if flash
+        if (FlxG.mouse.pressed())
+        {
+            var p = FlxG.mouse.getWorldPosition();
+            if (p.y < FlxG.height/2)
+            {
+                topPoints.push(p);
+            }
+            else
+            {
+                bottomPoints.push(p);
+            }
+        }
+        #end
+        
         topPlayer.charge(topPoints);
         bottomPlayer.charge(bottomPoints);
 

@@ -1,6 +1,7 @@
 package com.happyshiny.shoot.entities;
 
-import com.happyshiny.shoot.entities.Particles.ChargeEmitter;
+import com.happyshiny.shoot.entities.ChargeEmitter;
+import com.happyshiny.util.SoundManager;
 import nme.Lib;
 import org.flixel.FlxG;
 import org.flixel.FlxPoint;
@@ -13,10 +14,7 @@ class Player extends FlxSprite
     public var energy : Float;
     public var slots : Array<ChargeEmitter>;
 
-    public static var MAX_SLOTS : Int = 2;
-    public static var MAX_ENERGY : Float = 100;
-    public static var MISSILE_ENERGY : Float = 25; // per shot
-    public static var REGENERATE_RATE : Float = 25; // per second
+    public static var MAX_FINGERS : Int = 3;
     public static var SIDE_BOTTOM : Int = 1;
     public static var SIDE_TOP : Int = 2;
     public static var COLOR_TOP : Int = 0xffff0000;
@@ -36,12 +34,14 @@ class Player extends FlxSprite
         x = 0;
         if (side == Player.SIDE_TOP)
         {
-            makeGraphic(FlxG.width, 150, COLOR_TOP);
+            color = COLOR_TOP;
+            makeGraphic(FlxG.width, 100, 0xffffffff);
             y = 0;
         }
         else
         {
-            makeGraphic(FlxG.width, 150, COLOR_BOTTOM);
+            color = COLOR_BOTTOM;
+            makeGraphic(FlxG.width, 100, 0xffffffff);
             y = FlxG.height - this.height;
         }
     }
@@ -49,9 +49,6 @@ class Player extends FlxSprite
     public override function update()
     {
         super.update();
-
-        energy = energy + REGENERATE_RATE * FlxG.elapsed;
-        if (energy >= MAX_ENERGY) energy = MAX_ENERGY;
 
         if (this.y + this.height < 0 || this.y > FlxG.height)
         {
@@ -65,16 +62,17 @@ class Player extends FlxSprite
         if (!this.alive) return;
 
         super.hurt(damage);
+        SoundManager.play("hit");
 
-        FlxG.shake(0.01, 0.1);
+        FlxG.shake(0.01, 0.3);
 
         if (this.side == SIDE_TOP)
         {
-            y = y - 10;
+            y = y - 11;
         }
         else
         {
-            y = y + 10;
+            y = y + 11;
         }
     }
 
@@ -82,7 +80,7 @@ class Player extends FlxSprite
     {
         if (!this.alive) return;
 
-        if (points.length > MAX_SLOTS) points = points.splice(0, MAX_SLOTS);
+        if (points.length > MAX_FINGERS) points = points.splice(0, MAX_FINGERS);
 
         for(m in slots)
         {
@@ -113,6 +111,7 @@ class Player extends FlxSprite
             }
             closest.x = p.x;
             closest.y = p.y;
+            closest.color = color;
             closest.assigned = true;
         }
 
@@ -145,7 +144,7 @@ class Player extends FlxSprite
         }
 
         m.player = this;
-        m.x = p.x;
+        m.x = p.x - Missile.WIDTH/2;
         m.revive();
     }
 }

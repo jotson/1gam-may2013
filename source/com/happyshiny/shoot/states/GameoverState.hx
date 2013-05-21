@@ -40,7 +40,7 @@ class GameoverState extends FlxState
         }
         add(winnerTextTop);
 
-        var winnerTextBottom : FlxText = new FlxText(0, FlxG.height - FlxG.height/8 - 56, FlxG.width, "", 56, true);
+        var winnerTextBottom : FlxText = new FlxText(0, FlxG.height - FlxG.height/8 - 56*2, FlxG.width, "", 56, true);
         winnerTextBottom.angle = 180;
         winnerTextBottom.alignment = "center";
         if (G.topWins)
@@ -54,7 +54,7 @@ class GameoverState extends FlxState
         add(winnerTextBottom);
 
         // Start button
-        add(new Button(FlxG.width/2, FlxG.height/2, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
+        add(new Button(FlxG.width/2, FlxG.height/2 - 32, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
 
         // Keyboard events
         Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
