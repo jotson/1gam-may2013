@@ -1,13 +1,19 @@
 package com.happyshiny.shoot.entities;
 
+import com.happyshiny.shoot.entities.Particles.ChargeEmitter;
+import nme.Lib;
 import org.flixel.FlxG;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
+import org.flixel.FlxU;
 
 class Player extends FlxSprite
 {
     public var side : Int;
     public var energy : Float;
+    public var slots : Array<ChargeEmitter>;
+
+    public static var MAX_SLOTS : Int = 2;
     public static var MAX_ENERGY : Float = 100;
     public static var MISSILE_ENERGY : Float = 25; // per shot
     public static var REGENERATE_RATE : Float = 25; // per second
@@ -20,6 +26,8 @@ class Player extends FlxSprite
     {
         super(0, 0);
 
+        slots = new Array<ChargeEmitter>();
+
         this.energy = 0;
         this.side = side;
 
@@ -28,13 +36,13 @@ class Player extends FlxSprite
         x = 0;
         if (side == Player.SIDE_TOP)
         {
-            makeGraphic(FlxG.width, 25, COLOR_TOP);
-            y = 150;
+            makeGraphic(FlxG.width, 150, COLOR_TOP);
+            y = 0;
         }
         else
         {
-            makeGraphic(FlxG.width, 25, COLOR_BOTTOM);
-            y = FlxG.height - this.height - 150;
+            makeGraphic(FlxG.width, 150, COLOR_BOTTOM);
+            y = FlxG.height - this.height;
         }
     }
 
@@ -70,16 +78,62 @@ class Player extends FlxSprite
         }
     }
 
+    public function charge(points : Array<FlxPoint>)
+    {
+        if (!this.alive) return;
+
+        if (points.length > MAX_SLOTS) points = points.splice(0, MAX_SLOTS);
+
+        for(m in slots)
+        {
+            m.assigned = false;
+        }
+
+        for(p in points)
+        {
+            // Assign the closest ChargeEmitter to each touch
+            var distance = Lib.MAX_FLOAT_VALUE;
+            var closest : ChargeEmitter = null;
+            for(m in slots)
+            {
+                if (m.assigned) continue;
+                var d = FlxU.getDistance(p, new FlxPoint(m.x, m.y));
+                if (d < distance)
+                {
+                    distance = d;
+                    closest = m;
+                }
+            }
+            if (closest == null)
+            {
+                closest = cast(G.emitters.recycle(ChargeEmitter), ChargeEmitter);
+                closest.revive();
+                closest.go();
+                slots.push(closest);
+            }
+            closest.x = p.x;
+            closest.y = p.y;
+            closest.assigned = true;
+        }
+
+        for (m in slots)
+        {
+            if (!m.assigned)
+            {
+                if (m.energy == ChargeEmitter.MAX_ENERGY)
+                {
+                    fire(new FlxPoint(m.x, m.y));
+                }
+                m.stop();
+                slots.remove(m);
+            }
+        }
+    }
+
     public function fire(p : FlxPoint)
     {
         if (!this.alive) return;
 
-        if (energy < MISSILE_ENERGY)
-        {
-            // TODO Bzzt
-            return;
-        }
-        
         var m : Missile = null;
         if (side == Player.SIDE_TOP)
         {
@@ -92,18 +146,6 @@ class Player extends FlxSprite
 
         m.player = this;
         m.x = p.x;
-
-        if (side == Player.SIDE_TOP)
-        {
-            m.y = this.y + this.height + 10;
-        }
-        else
-        {
-            m.y = this.y - m.height - 10;
-        }
-
         m.revive();
-
-        energy -= MISSILE_ENERGY;
     }
 }

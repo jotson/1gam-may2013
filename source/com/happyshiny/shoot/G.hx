@@ -41,14 +41,13 @@ import com.happyshiny.util.SoundManager;
 
 class G
 {
-    public static var points : Array<FlxPoint> = new Array<FlxPoint>();
-    public static var playerTop : Player;
-    public static var playerBottom : Player;
+    public static var topPoints : Array<FlxPoint> = new Array<FlxPoint>();
+    public static var bottomPoints : Array<FlxPoint> = new Array<FlxPoint>();
+    public static var topPlayer : Player;
+    public static var bottomPlayer : Player;
     public static var topGroup : FlxGroup;
     public static var bottomGroup : FlxGroup;
-
-    public static var topEnergyBar : FlxBar;
-    public static var bottomEnergyBar : FlxBar;
+    public static var emitters : FlxGroup;
 
     public static var topWins : Bool = false;
 
@@ -56,37 +55,27 @@ class G
     {
         FlxG.state.bgColor = 0xff000000;
 
-        playerTop = new Player(Player.SIDE_TOP);
-        playerBottom = new Player(Player.SIDE_BOTTOM);
+        topPlayer = new Player(Player.SIDE_TOP);
+        bottomPlayer = new Player(Player.SIDE_BOTTOM);
 
         topGroup = new FlxGroup();
         bottomGroup = new FlxGroup();
+        emitters = new FlxGroup();
 
-        G.topGroup.add(playerTop);
-        G.bottomGroup.add(playerBottom);
+        G.topGroup.add(topPlayer);
+        G.bottomGroup.add(bottomPlayer);
 
         FlxG.state.add(topGroup);
         FlxG.state.add(bottomGroup);
-
-        topEnergyBar = new FlxBar(10, 10, FlxBar.FILL_RIGHT_TO_LEFT, FlxG.width - 20, 10);
-        topEnergyBar.setRange(0, Player.MAX_ENERGY);
-        topEnergyBar.setParent(playerTop, "energy");
-        topEnergyBar.createFilledBar(0xff330000, 0xffff0000, true, 0xff000000);
-        FlxG.state.add(topEnergyBar);
-
-        bottomEnergyBar = new FlxBar(10, FlxG.height - 20, FlxBar.FILL_LEFT_TO_RIGHT, FlxG.width - 20, 10);
-        bottomEnergyBar.setRange(0, Player.MAX_ENERGY);
-        bottomEnergyBar.setParent(playerBottom, "energy");
-        bottomEnergyBar.createFilledBar(0xff000033, 0xff0000ff, true, 0xff000000);
-        FlxG.state.add(bottomEnergyBar);
+        FlxG.state.add(emitters);
 
         topWins = false;
     }
 
     public static function update()
     {
-        playerTop.update();
-        playerBottom.update();
+        topPlayer.update();
+        bottomPlayer.update();
 
         getInput();
         collisions();
@@ -99,7 +88,7 @@ class G
 
     public static function gameOver()
     {
-        topWins = playerTop.alive;
+        topWins = topPlayer.alive;
         FlxG.switchState(new GameoverState());
     }
 
@@ -107,9 +96,9 @@ class G
     {
         if (FlxU.getClassName(top) == "com.happyshiny.shoot.entities.Missile")
         {
-            if (top.acceleration.y == 0)
+            if (top.velocity.y == 0)
             {
-                playerTop.hurt(0);
+                topPlayer.hurt(0);
             }
             top.kill();
         }
@@ -121,9 +110,9 @@ class G
 
         if (FlxU.getClassName(bottom) == "com.happyshiny.shoot.entities.Missile")
         {
-            if (bottom.acceleration.y == 0)
+            if (bottom.velocity.y == 0)
             {
-                playerBottom.hurt(0);
+                bottomPlayer.hurt(0);
             }
             bottom.kill();
         }
@@ -133,42 +122,34 @@ class G
             bottom.hurt(0);
         }
 
+        FlxG.flash(0xffffffff, 0.1, null, true);
+
         return true;
     }
 
     public static function getInput()
     {
         // Check mouse/touch input
-        #if mobile
         for (touch in FlxG.touchManager.touches)
         {
             if (touch.pressed())
             {
-                points.push(touch.getWorldPosition());
-            }
-        }
-        #else
-        if (FlxG.mouse.justPressed())
-        {
-            points.push(FlxG.mouse.getWorldPosition());
-        }
-        #end
-
-        if (points.length > 0)
-        {
-            for(point in points)
-            {
-                if (point.y > FlxG.height/2)
+                var p = touch.getWorldPosition();
+                if (p.y < FlxG.height/2)
                 {
-                    // Bottom player
-                    playerBottom.fire(point);
+                    topPoints.push(p);
                 }
                 else
                 {
-                    playerTop.fire(point);
+                    bottomPoints.push(p);
                 }
             }
-            points = [];
         }
+
+        topPlayer.charge(topPoints);
+        bottomPlayer.charge(bottomPoints);
+
+        topPoints = [];
+        bottomPoints = [];
     }
 }

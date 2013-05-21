@@ -6,32 +6,39 @@ import org.flixel.FlxSprite;
 
 class Missile extends FlxSprite
 {
-    public static var ACCELERATION = 300;
+    public static var SPEED = 1600;
     public var player : Player;
     private var launchTimer : Float;
 
     public function new()
     {
         super(-500, -500);
-        this.width = 10;
-        this.height = 25;
+        this.width = 50;
+        this.height = 2000;
     }
 
     public override function revive()
     {
         super.revive();
 
-        var c : Int = Player.COLOR_BOTTOM;
+        var c : Int;
         if (player.side == Player.SIDE_TOP)
         {
+            y = 0 - this.height;
             c = Player.COLOR_TOP;
+        }
+        else
+        {
+            y = FlxG.height;
+            c = Player.COLOR_BOTTOM;
         }
 
         this.makeGraphic(Std.int(width), Std.int(height), c);
         this.velocity.y = 0;
         this.acceleration.y = 0;
+        this.visible = false;
 
-        launchTimer = 2;
+        launchTimer = 0.25;
     }
 
     public override function update()
@@ -45,17 +52,18 @@ class Missile extends FlxSprite
         {
             if (player.side == Player.SIDE_TOP)
             {
-                acceleration.y = ACCELERATION;
+                velocity.y = SPEED;
                 angle = 180;
             }
             else
             {
-                acceleration.y = -ACCELERATION;
+                velocity.y = -SPEED;
                 angle = 0;
             }
+            visible = true;
         }
 
-        if (acceleration.y != 0 && !this.onScreen())
+        if (velocity.y != 0 && !this.onScreen())
         {
             // TODO Score points
             kill();
