@@ -34,24 +34,58 @@ class MenuState extends FlxState
         bottom.makeGraphic(FlxG.width, Std.int(FlxG.height/2), Player.COLOR_BOTTOM);
         add(bottom);
 
-        var titleText : FlxText = new FlxText(0, FlxG.height/16 * 2, FlxG.width, "DUEL!", 56, true);
-        titleText.alignment = "center";
-        add(titleText);
+        // Top
+        var t : FlxText = new FlxText(0, FlxG.height/16 * 1, FlxG.width, "DUEL!", 56, true);
+        t.alignment = "center";
+        add(t);
 
-        var bylineText : FlxText = new FlxText(0, FlxG.height/16 * 4, FlxG.width, "By John Watson", 28, true);
-        bylineText.alignment = "center";
-        add(bylineText);
+        t = new FlxText(0, FlxG.height/16 * 3, FlxG.width, "By John Watson", 20, true);
+        t.alignment = "center";
+        add(t);
 
-        var urlText : FlxText = new FlxText(0, FlxG.height/16 * 12, FlxG.width, "flagrantdisregard.com", 20, true);
-        urlText.alignment = "center";
-        add(urlText);
+        t = new FlxText(0, FlxG.height/16 * 4, FlxG.width, "flagrantdisregard.com", 20, true);
+        t.alignment = "center";
+        add(t);
 
-        var ogamText : FlxText = new FlxText(0, FlxG.height/16 * 13, FlxG.width, "#1GAM", 20, true);
-        ogamText.alignment = "center";
-        add(ogamText);
+        t = new FlxText(0, FlxG.height/16 * 5, FlxG.width, "#1GAM", 20, true);
+        t.alignment = "center";
+        add(t);
+
+        // Bottom
+        t = new FlxText(0, FlxG.height/16 * 15, FlxG.width, "DUEL!", 56, true);
+        #if mobile
+        t.y -= Std.int(t.height);
+        #end
+        t.alignment = "center";
+        t.angle = 180;
+        add(t);
+
+        t = new FlxText(0, FlxG.height/16 * 13, FlxG.width, "By John Watson", 20, true);
+        #if mobile
+        t.y -= Std.int(t.height);
+        #end
+        t.alignment = "center";
+        t.angle = 180;
+        add(t);
+
+        t = new FlxText(0, FlxG.height/16 * 12, FlxG.width, "flagrantdisregard.com", 20, true);
+        #if mobile
+        t.y -= Std.int(t.height);
+        #end
+        t.alignment = "center";
+        t.angle = 180;
+        add(t);
+
+        t = new FlxText(0, FlxG.height/16 * 11, FlxG.width, "#1GAM", 20, true);
+        #if mobile
+        t.y -= Std.int(t.height);
+        #end
+        t.alignment = "center";
+        t.angle = 180;
+        add(t);
 
         // Start button
-        add(new Button(FlxG.width/2, FlxG.height/2 - 20, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
+        add(new Button(FlxG.width/2, FlxG.height/2, 'assets/images/start-button.png', 128, 128, function() { SoundManager.play("button"); startGame(); }));
 
         // Keyboard events
         Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);

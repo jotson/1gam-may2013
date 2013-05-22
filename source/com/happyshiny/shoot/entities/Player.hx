@@ -17,8 +17,8 @@ class Player extends FlxSprite
     public static var MAX_FINGERS : Int = 3;
     public static var SIDE_BOTTOM : Int = 1;
     public static var SIDE_TOP : Int = 2;
-    public static var COLOR_TOP : Int = 0xffff0000;
-    public static var COLOR_BOTTOM : Int = 0xff0000ff;
+    public static var COLOR_TOP : Int = 0xffcc9900;
+    public static var COLOR_BOTTOM : Int = 0xff0099cc;
 
     public function new(side : Int)
     {

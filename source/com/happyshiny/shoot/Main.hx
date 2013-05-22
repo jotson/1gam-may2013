@@ -57,6 +57,7 @@ class Main extends Sprite
         SoundManager.add("hit", "hit");
         SoundManager.add("missile-hit", "missile-hit");
         SoundManager.add("launch", "launch");
+        SoundManager.add("button", "button");
     }
 
     public static function main()

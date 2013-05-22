@@ -26,35 +26,40 @@ class GameoverState extends FlxState
     {
         super.create();
 
-        var winnerTextTop : FlxText = new FlxText(0, FlxG.height/8, FlxG.width, "", 56, true);
-        winnerTextTop.alignment = "center";
+        var t : FlxText = new FlxText(0, FlxG.height/2 - 200, FlxG.width, "X", 56, true);
+        t.alignment = "center";
         if (G.topWins)
         {
-            winnerTextTop.text = "RED WINS!";
-            this.bgColor = 0xffff0000;
+            t.text = "YOU LOSE!";
+            this.bgColor = Player.COLOR_TOP;
         }
         else
         {
-            winnerTextTop.text = "BLUE WINS!";
-            this.bgColor = 0xff0000ff;
+            t.text = "YOU WIN!";
+            this.bgColor = Player.COLOR_BOTTOM;
         }
-        add(winnerTextTop);
+        add(t);
+        t.flicker(0.5);
 
-        var winnerTextBottom : FlxText = new FlxText(0, FlxG.height - FlxG.height/8 - 56*2, FlxG.width, "", 56, true);
-        winnerTextBottom.angle = 180;
-        winnerTextBottom.alignment = "center";
+        t = new FlxText(0, FlxG.height/2 + 200, FlxG.width, "X", 56, true);
+        #if mobile
+        t.y -= Std.int(t.height);
+        #end
+        t.angle = 180;
+        t.alignment = "center";
         if (G.topWins)
         {
-            winnerTextBottom.text = "RED WINS!";
+            t.text = "YOU WIN!";
         }
         else
         {
-            winnerTextBottom.text = "BLUE WINS!";
+            t.text = "YOU LOSE!";
         }
-        add(winnerTextBottom);
+        add(t);
+        t.flicker(0.5);
 
         // Start button
-        add(new Button(FlxG.width/2, FlxG.height/2 - 32, 'assets/images/start-button.png', 128, 160, function() { startGame(); }));
+        add(new Button(FlxG.width/2, FlxG.height/2, 'assets/images/start-button.png', 128, 128, function() { SoundManager.play("button"); startGame(); }));
 
         // Keyboard events
         Lib.current.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
@@ -84,7 +89,9 @@ class GameoverState extends FlxState
         // Escape key (also Android back button)
         if (e.keyCode == 27)
         {
-            Lib.exit();
+            e.stopImmediatePropagation();
+            FlxG.switchState(new MenuState());
+            destroy();
         }
     }
 

@@ -23,6 +23,7 @@
         <sound path="hit.mp3" id="hit" />
         <sound path="missile-hit.mp3" id="missile-hit" />
         <sound path="launch.mp3" id="launch" />
+        <sound path="button.mp3" id="button" />
     </assets>
 
     <assets path="assets/sounds" if="android">
@@ -30,6 +31,7 @@
         <sound path="hit.ogg" id="hit" />
         <sound path="missile-hit.ogg" id="missile-hit" />
         <sound path="launch.ogg" id="launch" />
+        <sound path="button.ogg" id="button" />
     </assets>
 
     <assets path="assets/music">

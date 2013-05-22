@@ -35,7 +35,22 @@ class GameState extends FlxState
         FlxG.mouse.show();
         #end
 
-        // SoundManager.playMusic("music");
+        // GO!
+        var t : FlxText = new FlxText(0, FlxG.height/2 - 150, FlxG.width, "GO!", 56, true);
+        t.alignment = "center";
+        add(t);
+        t.flicker(1.0);
+        FlxG.tween(t, { alpha: 0 }, 2.0);
+
+        var t : FlxText = new FlxText(0, FlxG.height/2 + 150, FlxG.width, "GO!", 56, true);
+        #if mobile
+        t.y -= Std.int(t.height);
+        #end
+        t.angle = 180;
+        t.alignment = "center";
+        add(t);
+        t.flicker(1.0);
+        FlxG.tween(t, { alpha: 0 }, 2.0);
     }
     
     public function onKeyUp(e : KeyboardEvent):Void
@@ -49,14 +64,9 @@ class GameState extends FlxState
         if (e.keyCode == 27)
         {
             e.stopImmediatePropagation();
-            gotoMenu();
+            FlxG.switchState(new MenuState());
+            destroy();
         }
-    }
-
-    public function gotoMenu()
-    {
-        FlxG.switchState(new MenuState());
-        destroy();
     }
 
     public override function destroy():Void
