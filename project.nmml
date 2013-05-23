@@ -36,7 +36,7 @@
 
     <assets path="assets/music">
         <!-- mp3s -->
-        <!-- <music path="intro.mp3" id="intro" /> -->
+        <music path="music.mp3" id="music" />
     </assets>
 
     <!-- <certificate />

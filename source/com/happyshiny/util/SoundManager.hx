@@ -61,6 +61,11 @@ class SoundManager {
         FlxG.play(embeddedSound, volume, loop);
     }
 
+    public static function stopMusic()
+    {
+        FlxG.music.stop();
+    }
+
     public static function playMusic(embeddedSound : String, volume : Float = 1.0) : Void
     {
         #if android

@@ -51,6 +51,8 @@ class GameState extends FlxState
         add(t);
         t.flicker(1.0);
         FlxG.tween(t, { alpha: 0 }, 2.0);
+
+        SoundManager.stopMusic();
     }
     
     public function onKeyUp(e : KeyboardEvent):Void

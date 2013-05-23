@@ -94,7 +94,7 @@ class MenuState extends FlxState
         FlxG.mouse.show();
         #end
 
-        // SoundManager.playMusic("music");
+        SoundManager.playMusic("music");
     }
     
     public function startGame()
