@@ -41,8 +41,6 @@ import com.happyshiny.util.SoundManager;
 
 class G
 {
-    public static var topPoints : Array<FlxPoint> = new Array<FlxPoint>();
-    public static var bottomPoints : Array<FlxPoint> = new Array<FlxPoint>();
     public static var topPlayer : Player;
     public static var bottomPlayer : Player;
     public static var topGroup : FlxGroup;
@@ -138,6 +136,9 @@ class G
 
     public static function getInput()
     {
+        var topPoints : Array<FlxPoint> = new Array<FlxPoint>();
+        var bottomPoints : Array<FlxPoint> = new Array<FlxPoint>();
+
         // Check mouse/touch input
         for (touch in FlxG.touchManager.touches)
         {
@@ -173,8 +174,5 @@ class G
         
         topPlayer.charge(topPoints);
         bottomPlayer.charge(bottomPoints);
-
-        topPoints = [];
-        bottomPoints = [];
     }
 }

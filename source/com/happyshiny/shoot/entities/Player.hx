@@ -78,13 +78,12 @@ class Player extends FlxSprite
     {
         if (!this.alive) return;
 
-        if (points.length > MAX_FINGERS) points = points.splice(points.length-MAX_FINGERS, MAX_FINGERS);
-
         for(m in slots)
         {
             m.assigned = false;
         }
 
+        var emittersActive = 0;
         for(p in points)
         {
             // Assign the closest ChargeEmitter to each touch
@@ -111,6 +110,9 @@ class Player extends FlxSprite
             closest.y = p.y;
             closest.color = color;
             closest.assigned = true;
+
+            emittersActive++;
+            if (emittersActive >= MAX_FINGERS) break;
         }
 
         for (m in slots)
