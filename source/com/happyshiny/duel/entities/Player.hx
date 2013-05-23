@@ -1,12 +1,13 @@
-package com.happyshiny.shoot.entities;
+package com.happyshiny.duel.entities;
 
-import com.happyshiny.shoot.entities.ChargeEmitter;
+import com.happyshiny.duel.entities.ChargeEmitter;
 import com.happyshiny.util.SoundManager;
 import nme.Lib;
 import org.flixel.FlxG;
 import org.flixel.FlxPoint;
 import org.flixel.FlxSprite;
 import org.flixel.FlxU;
+import org.flixel.tweens.util.Ease;
 
 class Player extends FlxSprite
 {
@@ -19,6 +20,7 @@ class Player extends FlxSprite
     public static var SIDE_TOP : Int = 2;
     public static var COLOR_TOP : Int = 0xffcc9900;
     public static var COLOR_BOTTOM : Int = 0xff0099cc;
+    public static var HEIGHT : Int = 100;
 
     public function new(side : Int)
     {
@@ -33,14 +35,16 @@ class Player extends FlxSprite
         if (side == Player.SIDE_TOP)
         {
             color = COLOR_TOP;
-            makeGraphic(FlxG.width, 100, 0xffffffff);
+            makeGraphic(FlxG.width, Std.int(FlxG.height/2), 0xffffffff);
             y = 0;
+            FlxG.tween(this, { y: HEIGHT - this.height }, 1.0, { ease: Ease.backOut });
         }
         else
         {
             color = COLOR_BOTTOM;
-            makeGraphic(FlxG.width, 100, 0xffffffff);
+            makeGraphic(FlxG.width, Std.int(FlxG.height/2), 0xffffffff);
             y = FlxG.height - this.height;
+            FlxG.tween(this, { y: FlxG.height - HEIGHT }, 1.0, { ease: Ease.backOut });
         }
     }
 

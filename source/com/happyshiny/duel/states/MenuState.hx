@@ -1,7 +1,7 @@
-package com.happyshiny.shoot.states;
+package com.happyshiny.duel.states;
 
-import com.happyshiny.shoot.Button;
-import com.happyshiny.shoot.entities.Player;
+import com.happyshiny.duel.Button;
+import com.happyshiny.duel.entities.Player;
 import nme.Assets;
 import nme.geom.Rectangle;
 import nme.net.SharedObject;

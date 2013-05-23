@@ -1,7 +1,7 @@
-package com.happyshiny.shoot.states;
+package com.happyshiny.duel.states;
 
-import com.happyshiny.shoot.G;
-import com.happyshiny.shoot.entities.Player;
+import com.happyshiny.duel.G;
+import com.happyshiny.duel.entities.Player;
 import nme.Assets;
 import nme.geom.Rectangle;
 import nme.net.SharedObject;
@@ -36,21 +36,28 @@ class GameState extends FlxState
         #end
 
         // GO!
-        var t : FlxText = new FlxText(0, FlxG.height/2 - 150, FlxG.width, "GO!", 56, true);
-        t.alignment = "center";
-        add(t);
-        t.flicker(1.0);
-        FlxG.tween(t, { alpha: 0 }, 2.0);
+        FlxG.tween(this, {}, 0.5,
+            {
+                complete: function()
+                {
+                    var t : FlxText = new FlxText(0, FlxG.height/2 - 150, FlxG.width, "GO!", 56, true);
+                    t.alignment = "center";
+                    add(t);
+                    t.flicker(1.0);
+                    FlxG.tween(t, { alpha: 0 }, 2.0);
 
-        var t : FlxText = new FlxText(0, FlxG.height/2 + 150, FlxG.width, "GO!", 56, true);
-        #if mobile
-        t.y -= Std.int(t.height);
-        #end
-        t.angle = 180;
-        t.alignment = "center";
-        add(t);
-        t.flicker(1.0);
-        FlxG.tween(t, { alpha: 0 }, 2.0);
+                    var t : FlxText = new FlxText(0, FlxG.height/2 + 150, FlxG.width, "GO!", 56, true);
+                    #if mobile
+                    t.y -= Std.int(t.height);
+                    #end
+                    t.angle = 180;
+                    t.alignment = "center";
+                    add(t);
+                    t.flicker(1.0);
+                    FlxG.tween(t, { alpha: 0 }, 2.0);
+                }
+            }
+        );
 
         SoundManager.stopMusic();
     }

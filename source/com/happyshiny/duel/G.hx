@@ -1,7 +1,7 @@
-package com.happyshiny.shoot;
+package com.happyshiny.duel;
 
-import com.happyshiny.shoot.entities.Player;
-import com.happyshiny.shoot.states.GameoverState;
+import com.happyshiny.duel.entities.Player;
+import com.happyshiny.duel.states.GameoverState;
 import nme.Assets;
 import nme.geom.Rectangle;
 import nme.geom.Point;
@@ -93,7 +93,7 @@ class G
     public static function objectHit(o1 : FlxObject, o2 : FlxObject) : Bool
     {
         // Top player missile hits something
-        if (FlxU.getClassName(o1) == "com.happyshiny.shoot.entities.Missile")
+        if (FlxU.getClassName(o1) == "com.happyshiny.duel.entities.Missile")
         {
             if (o1.velocity.y == 0)
             {
@@ -103,13 +103,13 @@ class G
         }
 
         // Missile hits top player
-        if (FlxU.getClassName(o1) == "com.happyshiny.shoot.entities.Player")
+        if (FlxU.getClassName(o1) == "com.happyshiny.duel.entities.Player")
         {
             o1.hurt(0);
         }
 
         // Bottom player missile hits something
-        if (FlxU.getClassName(o2) == "com.happyshiny.shoot.entities.Missile")
+        if (FlxU.getClassName(o2) == "com.happyshiny.duel.entities.Missile")
         {
             if (o2.velocity.y == 0)
             {
@@ -119,12 +119,12 @@ class G
         }
 
         // Missile hits bottom player
-        if (FlxU.getClassName(o2) == "com.happyshiny.shoot.entities.Player")
+        if (FlxU.getClassName(o2) == "com.happyshiny.duel.entities.Player")
         {
             o2.hurt(0);
         }
 
-        // if (FlxU.getClassName(o2) == "com.happyshiny.shoot.entities.Particles.ChargeEmitter")
+        // if (FlxU.getClassName(o2) == "com.happyshiny.duel.entities.Particles.ChargeEmitter")
         // {
 
         // }

@@ -1,4 +1,4 @@
-package com.happyshiny.shoot;
+package com.happyshiny.duel;
 
 import nme.Lib;
 import nme.display.StageAlign;
@@ -12,7 +12,7 @@ import org.flixel.system.FlxDebugger;
 import org.flixel.FlxG;
 import org.flixel.FlxAssets;
 
-import com.happyshiny.shoot.states.MenuState;
+import com.happyshiny.duel.states.MenuState;
 import com.happyshiny.util.SoundManager;
 
 class Main extends Sprite

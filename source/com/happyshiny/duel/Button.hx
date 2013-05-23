@@ -1,4 +1,4 @@
-package com.happyshiny.shoot;
+package com.happyshiny.duel;
 
 import org.flixel.FlxG;
 import org.flixel.FlxPoint;

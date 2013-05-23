@@ -1,4 +1,4 @@
-package com.happyshiny.shoot.entities;
+package com.happyshiny.duel.entities;
 
 import com.happyshiny.util.SoundManager;
 import org.flixel.addons.FlxEmitterExt;

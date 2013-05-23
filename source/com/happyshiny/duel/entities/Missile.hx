@@ -1,7 +1,7 @@
-package com.happyshiny.shoot.entities;
+package com.happyshiny.duel.entities;
 
-import com.happyshiny.shoot.entities.ExhaustEmitter;
-import com.happyshiny.shoot.entities.ExplosionEmitter;
+import com.happyshiny.duel.entities.ExhaustEmitter;
+import com.happyshiny.duel.entities.ExplosionEmitter;
 import com.happyshiny.util.SoundManager;
 import org.flixel.FlxG;
 import org.flixel.FlxPoint;
