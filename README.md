@@ -4,7 +4,7 @@
 
 - [Get it free @ Play Store ](https://play.google.com/store/apps/details?id=com.happyshiny.duel&feature=search_result)
 
-- [More info](http://flagrantdisregard.com/project/onegameamonth/)
+- [More info](http://flagrantdisregard.com/1gam-duel/)
 
 # How to play
 
