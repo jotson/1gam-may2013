@@ -2,7 +2,7 @@
 
 - [Watch video](http://www.youtube.com/watch?v=XnKHd9riIiQ)
 
-- [Get it free @ Play Store ](https://play.google.com/store/apps/details?id=com.happyshiny.duel&feature=search_result)
+- [Get it free @ Google Play](https://play.google.com/store/apps/details?id=com.happyshiny.duel&feature=search_result)
 
 - [More info](http://flagrantdisregard.com/1gam-duel/)
 
