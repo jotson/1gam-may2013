@@ -2,7 +2,7 @@
 
 - [Watch video](http://www.youtube.com/watch?v=XnKHd9riIiQ)
 
-- [Download Android APK](http://flagrantdisregard.com/wp-content/uploads/2013/01/duel-1gam-may2013-johnwatson-debug.apk_.zip)
+- [Get it free @ Play Store ](https://play.google.com/store/apps/details?id=com.happyshiny.duel&feature=search_result)
 
 - [More info](http://flagrantdisregard.com/project/onegameamonth/)
 

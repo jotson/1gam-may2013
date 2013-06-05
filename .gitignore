@@ -1,5 +1,5 @@
 .notes
 release/
-bin/
+build/
 scrapbook/
 *.sublime-*

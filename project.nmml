@@ -2,7 +2,7 @@
 <project>
     <!-- Change PACKAGE to something meaningful -->
     <meta title="Duel!" package="com.happyshiny.duel" version="1.0.0" company="Happy Shiny" />
-    <app main="com.happyshiny.duel.Main" file="Main" path="bin" swf-version="11" />
+    <app main="com.happyshiny.duel.Main" file="Main" path="build" swf-version="11" />
     
     <window width="400" height="608" orientation="portrait" resizable="true" background="0x000000" />
 

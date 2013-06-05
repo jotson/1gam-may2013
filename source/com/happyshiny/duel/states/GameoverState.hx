@@ -28,6 +28,7 @@ class GameoverState extends FlxState
 
         var t : FlxText = new FlxText(0, FlxG.height/2 - 200, FlxG.width, "X", 56, true);
         t.alignment = "center";
+        t.font = G.TITLEFONT;
         if (G.topWins)
         {
             t.text = "YOU LOSE!";
@@ -47,6 +48,7 @@ class GameoverState extends FlxState
         #end
         t.angle = 180;
         t.alignment = "center";
+        t.font = G.TITLEFONT;
         if (G.topWins)
         {
             t.text = "YOU WIN!";
